@@ -208,6 +208,17 @@ while True:
     for obstacle in obstacles:
         obstacle.draw()
 
+    # Render health bars
+    font = pygame.font.SysFont(None, 36)
+    health_text1 = font.render(f'Health: {player1.health}', True, BLACK)
+    health_text2 = font.render(f'Health: {player2.health}', True, BLACK)
+    win.blit(health_text1, (10, 10))
+    win.blit(health_text2, (WIDTH - 150, 10))
+
+    # Render replay button if game over
+    if game_over:
+        replay_button_rect = draw_replay_button()
+
     pygame.display.update()
 
     if player1.health <= 0 and not player1.exploding:
@@ -223,3 +234,4 @@ while True:
     if player2.health <= 0 and player2.explosion_frame >= explosion_duration:
         print("Player 1 Wins!")
         game_over = True
+
